@@ -23,15 +23,11 @@ opt.add_argument("disbale-gpu")
 
 # web = Chrome(options=opt)
 web = Chrome()
-web.implicitly_wait(10)
-web.get('https://m.weibo.cn/search?containerid=231583')
+web.implicitly_wait(5)
 searchkeys = ['杨利伟的太空一日', '王亚平成中国首位出舱女航天员', '天宫课堂第二课', '欢迎翟志刚王亚平叶光富回地球', '中国空间站航天员首次出舱', '神舟十七号发射圆满成功']
 
-web.find_element(by=By.XPATH, value='//*[@id="app"]/div[1]/div[1]/div[1]/div/div/div[2]/form/input').send_keys("杨利伟的太空一日", Keys.ENTER)
-# print(web.window_handles)
-# web.switch_to.window(web.window_handles[-1])
-
 for key in searchkeys:
+    web.get('https://m.weibo.cn/search?containerid=231583')
     web.find_element(by=By.XPATH, value='//*[@id="app"]/div[1]/div[1]/div[1]/div/div/div[2]/form/input').send_keys(
         key, Keys.ENTER)
     i = 3
@@ -109,7 +105,8 @@ for key in searchkeys:
             random_sleep()
         except:
             print("这个话题爬完了")
-            web.find_element(by=By.XPATH,
-                             value=f'//*[@id="app"]//div[@class="nt-left"]/i[@class="m-font m-font-arrow-left"]').click()
+            # web.find_element(by=By.XPATH,
+            #                  value=f'//*[@id="app"]//div[@class="nt-left"]/i[@class="m-font m-font-arrow-left"]').click()
             random_sleep()
+            break
 
